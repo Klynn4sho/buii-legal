@@ -1,0 +1,2473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helix — Discord Bot Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= TOP BAR ================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+            <div class="brand-mark">↗</div>
+            <span>helix</span>
+        </div>
+
+        <div class="top-actions">
+
+            <!-- Theme -->
+            <button class="pill" id="themeBtn">
+                ◐ <span>Theme</span>
+            </button>
+
+            <!-- Notifications -->
+            <div class="menu-wrapper">
+
+                <button class="icon-btn notification-button" id="notificationBtn" aria-label="Notifications">
+                    <svg class="bell-svg" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>
+                        <path d="M10 21h4"></path>
+                    </svg>
+                    <span class="notification-dot show"></span>
+                </button>
+
+                <div
+                    class="dropdown notifications-menu"
+                    id="notificationsMenu">
+
+                    <div class="dropdown-header">
+
+                        <div>
+                            <strong>Notifications</strong>
+                            <small id="notificationCount">
+                                3 unread
+                            </small>
+                        </div>
+
+                        <button
+                            class="text-button"
+                            id="markReadBtn">
+                            Mark all read
+                        </button>
+
+                    </div>
+
+
+                    <div class="notification-list">
+
+                        <div
+                            class="notification unread"
+                            data-notification>
+
+                            <div class="notification-icon">
+                                ✦
+                            </div>
+
+                            <div class="notification-content">
+
+                                <strong>
+                                    Welcome automation
+                                </strong>
+
+                                <p>
+                                    7 new members were greeted today.
+                                </p>
+
+                                <span>
+                                    24 minutes ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="notification unread"
+                            data-notification>
+
+                            <div class="notification-icon">
+                                ✓
+                            </div>
+
+                            <div class="notification-content">
+
+                                <strong>
+                                    AutoMod blocked a link
+                                </strong>
+
+                                <p>
+                                    A suspicious link was automatically removed.
+                                </p>
+
+                                <span>
+                                    42 minutes ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="notification unread"
+                            data-notification>
+
+                            <div class="notification-icon">
+                                ⚡
+                            </div>
+
+                            <div class="notification-content">
+
+                                <strong>
+                                    Command activity increased
+                                </strong>
+
+                                <p>
+                                    /music usage increased by 14%.
+                                </p>
+
+                                <span>
+                                    1 hour ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="notification"
+                            data-notification>
+
+                            <div class="notification-icon">
+                                ↗
+                            </div>
+
+                            <div class="notification-content">
+
+                                <strong>
+                                    Helix is operational
+                                </strong>
+
+                                <p>
+                                    Bot uptime is currently 99.98%.
+                                </p>
+
+                                <span>
+                                    3 hours ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="view-all-button"
+                        onclick="showPage('stats'); closeMenus();">
+                        View activity →
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Profile -->
+            <div class="menu-wrapper">
+
+                <button
+                    class="profile-button"
+                    id="profileBtn"
+                    aria-label="Profile"
+                    aria-expanded="false">
+
+                    <div class="profile-avatar">
+                        S
+                    </div>
+
+                    <div class="profile-name">
+                        <strong>secret</strong>
+                        <small>Administrator</small>
+                    </div>
+
+                    <span class="profile-arrow">
+                        ⌄
+                    </span>
+
+                </button>
+
+
+                <div
+                    class="dropdown profile-menu"
+                    id="profileMenu">
+
+                    <div class="profile-menu-header">
+
+                        <div class="profile-avatar large">
+                            S
+                        </div>
+
+                        <div>
+                            <strong>secret</strong>
+                            <small>Administrator</small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-divider"></div>
+
+
+                    <button
+                        class="profile-menu-item"
+                        onclick="toast('Profile settings opened')">
+
+                        <span>◎</span>
+
+                        <div>
+                            <strong>Profile</strong>
+                            <small>Manage your account</small>
+                        </div>
+
+                    </button>
+
+
+                    <button
+                        class="profile-menu-item"
+                        onclick="toast('Dashboard settings opened')">
+
+                        <span>⚙</span>
+
+                        <div>
+                            <strong>Settings</strong>
+                            <small>Dashboard preferences</small>
+                        </div>
+
+                    </button>
+
+
+                    <button
+                        class="profile-menu-item"
+                        onclick="toast('Discord account opened')">
+
+                        <span>◉</span>
+
+                        <div>
+                            <strong>Discord account</strong>
+                            <small>Manage Discord connection</small>
+                        </div>
+
+                    </button>
+
+
+                    <div class="profile-divider"></div>
+
+
+                    <button
+                        class="profile-menu-item danger"
+                        onclick="logout()">
+
+                        <span>↪</span>
+
+                        <div>
+                            <strong>Log out</strong>
+                            <small>Disconnect this session</small>
+                        </div>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= LAYOUT ================= -->
+
+    <div class="layout">
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+            <div class="section-label">
+                Dashboard
+            </div>
+
+            <nav class="nav">
+
+                <button class="nav-item active" data-page="home">
+                    <span class="dot"></span>
+                    Overview
+                </button>
+
+                <button class="nav-item" data-page="commands">
+                    <span class="dot"></span>
+                    Commands
+                </button>
+
+                <button class="nav-item" data-page="automation">
+                    <span class="dot"></span>
+                    Automation
+                </button>
+
+                <button class="nav-item" data-page="stats">
+                    <span class="dot"></span>
+                    Analytics
+                </button>
+
+            </nav>
+
+
+            <div class="section-label">
+                Your servers
+            </div>
+
+            <div class="server-list">
+
+                <div class="server active"
+                     onclick="selectServer('Lunar Café')">
+
+                    <div class="server-icon">
+                        LC
+                    </div>
+
+                    <div>
+                        <b>Lunar Café</b>
+                        <small>4,892 members</small>
+                    </div>
+
+                </div>
+
+
+                <div class="server"
+                     onclick="selectServer('Arcadia')">
+
+                    <div class="server-icon">
+                        AR
+                    </div>
+
+                    <div>
+                        <b>Arcadia</b>
+                        <small>2,401 members</small>
+                    </div>
+
+                </div>
+
+
+                <div class="server"
+                     onclick="selectServer('Nightshift')">
+
+                    <div class="server-icon">
+                        NS
+                    </div>
+
+                    <div>
+                        <b>Nightshift</b>
+                        <small>817 members</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- ================= MAIN ================= -->
+
+        <main class="main">
+
+
+            <!-- HOME -->
+
+            <section class="page active-page" id="page-home">
+
+                <section class="hero">
+
+                    <div class="hero-row">
+
+                        <div>
+
+                            <div class="eyebrow">
+                                Server overview
+                            </div>
+
+                            <h1>
+                                Make your server feel alive.
+                            </h1>
+
+                            <p>
+                                Manage Helix without digging through menus.
+                                Commands, automation and server activity are
+                                all in one calm workspace.
+                            </p>
+
+                        </div>
+
+                        <div class="server-chip">
+
+                            <div class="server-icon">
+                                LC
+                            </div>
+
+                            <span id="heroServer">
+                                Lunar Café
+                            </span>
+
+                            <span class="muted">
+                                ⌄
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <section class="grid">
+
+                    <div class="card stats-card">
+
+                        <div class="card-title">
+                            <h2>Members</h2>
+                            <span class="trend">+8.4%</span>
+                        </div>
+
+                        <div class="big" id="members">
+                            4,892
+                        </div>
+
+                        <div class="muted stat-description">
+                            vs. last 30 days
+                        </div>
+
+                        <div class="bar">
+                            <span style="width:81%"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="card stats-card">
+
+                        <div class="card-title">
+                            <h2>Commands</h2>
+                            <span class="trend">+14%</span>
+                        </div>
+
+                        <div class="big">
+                            12.8k
+                        </div>
+
+                        <div class="muted stat-description">
+                            executed this month
+                        </div>
+
+                        <div class="bar">
+                            <span style="width:67%"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="card stats-card">
+
+                        <div class="card-title">
+                            <h2>Uptime</h2>
+                            <span class="trend">Stable</span>
+                        </div>
+
+                        <div class="big">
+                            99.98%
+                        </div>
+
+                        <div class="muted stat-description">
+                            last 30 days
+                        </div>
+
+                        <div class="bar">
+                            <span style="width:98%"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="card stats-card">
+
+                        <div class="card-title">
+                            <h2>Latency</h2>
+                            <span class="trend">−12ms</span>
+                        </div>
+
+                        <div class="big">
+                            43ms
+                        </div>
+
+                        <div class="muted stat-description">
+                            average response
+                        </div>
+
+                        <div class="bar">
+                            <span style="width:34%"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="card wide">
+
+                        <div class="card-title">
+
+                            <h2>
+                                Recent activity
+                            </h2>
+
+                            <button
+                                class="small-button"
+                                onclick="toast('Activity refreshed')">
+                                Refresh
+                            </button>
+
+                        </div>
+
+
+                        <div class="activity">
+
+                            <div class="activity-row">
+
+                                <div class="activity-icon">
+                                    ⚡
+                                </div>
+
+                                <div>
+                                    <strong>/music play</strong>
+
+                                    <small>
+                                        Nova requested a playlist
+                                    </small>
+                                </div>
+
+                                <span class="time">
+                                    2m
+                                </span>
+
+                            </div>
+
+
+                            <div class="activity-row">
+
+                                <div class="activity-icon">
+                                    ✓
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        AutoMod blocked a link
+                                    </strong>
+
+                                    <small>
+                                        Filtered by Link Guard
+                                    </small>
+                                </div>
+
+                                <span class="time">
+                                    11m
+                                </span>
+
+                            </div>
+
+
+                            <div class="activity-row">
+
+                                <div class="activity-icon">
+                                    ✦
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Welcome automation
+                                    </strong>
+
+                                    <small>
+                                        7 new members greeted
+                                    </small>
+                                </div>
+
+                                <span class="time">
+                                    24m
+                                </span>
+
+                            </div>
+
+
+                            <div class="activity-row">
+
+                                <div class="activity-icon">
+                                    ↯
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        /poll created
+                                    </strong>
+
+                                    <small>
+                                        Community poll opened
+                                    </small>
+                                </div>
+
+                                <span class="time">
+                                    41m
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card side">
+
+                        <div class="card-title">
+
+                            <h2>
+                                Quick commands
+                            </h2>
+
+                            <span class="muted">
+                                Enabled
+                            </span>
+
+                        </div>
+
+
+                        <div class="command-grid">
+
+                            <div class="command">
+                                <code>/help</code>
+
+                                <button
+                                    class="toggle on"
+                                    onclick="toggleCommand(this)">
+                                    <i></i>
+                                </button>
+                            </div>
+
+                            <div class="command">
+                                <code>/music</code>
+
+                                <button
+                                    class="toggle on"
+                                    onclick="toggleCommand(this)">
+                                    <i></i>
+                                </button>
+                            </div>
+
+                            <div class="command">
+                                <code>/poll</code>
+
+                                <button
+                                    class="toggle on"
+                                    onclick="toggleCommand(this)">
+                                    <i></i>
+                                </button>
+                            </div>
+
+                            <div class="command">
+                                <code>/giveaway</code>
+
+                                <button
+                                    class="toggle"
+                                    onclick="toggleCommand(this)">
+                                    <i></i>
+                                </button>
+                            </div>
+
+                            <div class="command">
+                                <code>/ticket</code>
+
+                                <button
+                                    class="toggle on"
+                                    onclick="toggleCommand(this)">
+                                    <i></i>
+                                </button>
+                            </div>
+
+                            <div class="command">
+                                <code>/stats</code>
+
+                                <button
+                                    class="toggle on"
+                                    onclick="toggleCommand(this)">
+                                    <i></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+
+            <!-- COMMANDS -->
+
+            <section class="page" id="page-commands">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            Command center
+                        </div>
+
+                        <h1>
+                            Commands
+                        </h1>
+
+                        <p>
+                            Control which commands Helix can use in your server.
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="primary-button"
+                        onclick="toast('Command configuration saved')">
+                        Save changes
+                    </button>
+
+                </div>
+
+
+                <div class="toolbar">
+
+                    <div class="search">
+
+                        <span>⌕</span>
+
+                        <input
+                            id="commandSearch"
+                            type="text"
+                            placeholder="Search commands..."
+                            oninput="filterCommands()">
+
+                    </div>
+
+
+                    <select
+                        id="commandCategory"
+                        onchange="filterCommands()">
+
+                        <option value="all">
+                            All categories
+                        </option>
+
+                        <option value="moderation">
+                            Moderation
+                        </option>
+
+                        <option value="music">
+                            Music
+                        </option>
+
+                        <option value="utility">
+                            Utility
+                        </option>
+
+                        <option value="fun">
+                            Fun
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="command-list" id="commandList">
+
+                    <div class="command-card"
+                         data-name="help"
+                         data-category="utility">
+
+                        <div class="command-main">
+
+                            <div class="command-symbol">
+                                ?
+                            </div>
+
+                            <div>
+
+                                <h3>/help</h3>
+
+                                <p>
+                                    Shows available Helix commands.
+                                </p>
+
+                                <span class="command-category">
+                                    Utility
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="command-settings">
+
+                            <span class="status-label">
+                                Enabled
+                            </span>
+
+                            <button
+                                class="toggle on"
+                                onclick="toggleCommand(this)">
+                                <i></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="command-card"
+                         data-name="music"
+                         data-category="music">
+
+                        <div class="command-main">
+
+                            <div class="command-symbol">
+                                ♪
+                            </div>
+
+                            <div>
+
+                                <h3>/music</h3>
+
+                                <p>
+                                    Play music and control the server queue.
+                                </p>
+
+                                <span class="command-category">
+                                    Music
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="command-settings">
+
+                            <span class="status-label">
+                                Enabled
+                            </span>
+
+                            <button
+                                class="toggle on"
+                                onclick="toggleCommand(this)">
+                                <i></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="command-card"
+                         data-name="ban"
+                         data-category="moderation">
+
+                        <div class="command-main">
+
+                            <div class="command-symbol">
+                                !
+                            </div>
+
+                            <div>
+
+                                <h3>/ban</h3>
+
+                                <p>
+                                    Ban a member from the server.
+                                </p>
+
+                                <span class="command-category">
+                                    Moderation
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="command-settings">
+
+                            <span class="status-label">
+                                Enabled
+                            </span>
+
+                            <button
+                                class="toggle on"
+                                onclick="toggleCommand(this)">
+                                <i></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="command-card"
+                         data-name="kick"
+                         data-category="moderation">
+
+                        <div class="command-main">
+
+                            <div class="command-symbol">
+                                ×
+                            </div>
+
+                            <div>
+
+                                <h3>/kick</h3>
+
+                                <p>
+                                    Remove a member from the server.
+                                </p>
+
+                                <span class="command-category">
+                                    Moderation
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="command-settings">
+
+                            <span class="status-label">
+                                Enabled
+                            </span>
+
+                            <button
+                                class="toggle on"
+                                onclick="toggleCommand(this)">
+                                <i></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="command-card"
+                         data-name="poll"
+                         data-category="utility">
+
+                        <div class="command-main">
+
+                            <div class="command-symbol">
+                                ◉
+                            </div>
+
+                            <div>
+
+                                <h3>/poll</h3>
+
+                                <p>
+                                    Create a community poll.
+                                </p>
+
+                                <span class="command-category">
+                                    Utility
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="command-settings">
+
+                            <span class="status-label">
+                                Enabled
+                            </span>
+
+                            <button
+                                class="toggle on"
+                                onclick="toggleCommand(this)">
+                                <i></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="command-card"
+                         data-name="giveaway"
+                         data-category="fun">
+
+                        <div class="command-main">
+
+                            <div class="command-symbol">
+                                ✦
+                            </div>
+
+                            <div>
+
+                                <h3>/giveaway</h3>
+
+                                <p>
+                                    Start and manage server giveaways.
+                                </p>
+
+                                <span class="command-category">
+                                    Fun
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="command-settings">
+
+                            <span class="status-label">
+                                Disabled
+                            </span>
+
+                            <button
+                                class="toggle"
+                                onclick="toggleCommand(this)">
+                                <i></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- AUTOMATION -->
+
+            <section class="page" id="page-automation">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            Server automation
+                        </div>
+
+                        <h1>
+                            Automation
+                        </h1>
+
+                        <p>
+                            Let Helix handle repetitive server tasks automatically.
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="primary-button"
+                        onclick="toast('Automation created')">
+                        + New automation
+                    </button>
+
+                </div>
+
+
+                <div class="automation-grid">
+
+                    <div class="automation-card">
+
+                        <div class="automation-icon">
+                            ✦
+                        </div>
+
+                        <div class="automation-content">
+
+                            <div class="automation-heading">
+
+                                <div>
+
+                                    <h2>
+                                        Welcome messages
+                                    </h2>
+
+                                    <span class="automation-status">
+                                        Active
+                                    </span>
+
+                                </div>
+
+                                <button
+                                    class="toggle on"
+                                    onclick="toggleAutomation(this)">
+                                    <i></i>
+                                </button>
+
+                            </div>
+
+                            <p>
+                                Automatically greet new members when they
+                                join Lunar Café.
+                            </p>
+
+                            <div class="automation-meta">
+                                # welcome · 7 messages today
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="automation-card">
+
+                        <div class="automation-icon">
+                            ✓
+                        </div>
+
+                        <div class="automation-content">
+
+                            <div class="automation-heading">
+
+                                <div>
+
+                                    <h2>
+                                        AutoMod
+                                    </h2>
+
+                                    <span class="automation-status">
+                                        Active
+                                    </span>
+
+                                </div>
+
+                                <button
+                                    class="toggle on"
+                                    onclick="toggleAutomation(this)">
+                                    <i></i>
+                                </button>
+
+                            </div>
+
+                            <p>
+                                Automatically detect spam, dangerous links
+                                and unwanted content.
+                            </p>
+
+                            <div class="automation-meta">
+                                31 actions · 98.4% detection rate
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="automation-card">
+
+                        <div class="automation-icon">
+                            ⏰
+                        </div>
+
+                        <div class="automation-content">
+
+                            <div class="automation-heading">
+
+                                <div>
+
+                                    <h2>
+                                        Scheduled messages
+                                    </h2>
+
+                                    <span class="automation-status">
+                                        Active
+                                    </span>
+
+                                </div>
+
+                                <button
+                                    class="toggle on"
+                                    onclick="toggleAutomation(this)">
+                                    <i></i>
+                                </button>
+
+                            </div>
+
+                            <p>
+                                Send recurring messages to selected channels.
+                            </p>
+
+                            <div class="automation-meta">
+                                Next message · Tomorrow at 09:00
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="automation-card">
+
+                        <div class="automation-icon">
+                            ↪
+                        </div>
+
+                        <div class="automation-content">
+
+                            <div class="automation-heading">
+
+                                <div>
+
+                                    <h2>
+                                        Reaction roles
+                                    </h2>
+
+                                    <span class="automation-status">
+                                        Active
+                                    </span>
+
+                                </div>
+
+                                <button
+                                    class="toggle on"
+                                    onclick="toggleAutomation(this)">
+                                    <i></i>
+                                </button>
+
+                            </div>
+
+                            <p>
+                                Automatically assign roles based on reactions.
+                            </p>
+
+                            <div class="automation-meta">
+                                4 active role menus
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="automation-card">
+
+                        <div class="automation-icon">
+                            ↯
+                        </div>
+
+                        <div class="automation-content">
+
+                            <div class="automation-heading">
+
+                                <div>
+
+                                    <h2>
+                                        Level rewards
+                                    </h2>
+
+                                    <span class="automation-status">
+                                        Disabled
+                                    </span>
+
+                                </div>
+
+                                <button
+                                    class="toggle"
+                                    onclick="toggleAutomation(this)">
+                                    <i></i>
+                                </button>
+
+                            </div>
+
+                            <p>
+                                Reward members automatically as they level up.
+                            </p>
+
+                            <div class="automation-meta">
+                                No active reward rules
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="automation-card">
+
+                        <div class="automation-icon">
+                            ★
+                        </div>
+
+                        <div class="automation-content">
+
+                            <div class="automation-heading">
+
+                                <div>
+
+                                    <h2>
+                                        Starboard
+                                    </h2>
+
+                                    <span class="automation-status">
+                                        Active
+                                    </span>
+
+                                </div>
+
+                                <button
+                                    class="toggle on"
+                                    onclick="toggleAutomation(this)">
+                                    <i></i>
+                                </button>
+
+                            </div>
+
+                            <p>
+                                Highlight messages that receive enough stars.
+                            </p>
+
+                            <div class="automation-meta">
+                                Threshold · 5 reactions
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- STATS -->
+
+            <section class="page" id="page-stats">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            Server analytics
+                        </div>
+
+                        <h1>
+                            Statistics
+                        </h1>
+
+                        <p>
+                            Understand how your community is using Helix.
+                        </p>
+
+                    </div>
+
+                    <select class="period-select">
+                        <option>Last 30 days</option>
+                        <option>Last 7 days</option>
+                        <option>Last 24 hours</option>
+                    </select>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="card analytics-number">
+
+                        <span class="muted">
+                            Total members
+                        </span>
+
+                        <strong>
+                            4,892
+                        </strong>
+
+                        <span class="trend">
+                            ↑ 8.4%
+                        </span>
+
+                    </div>
+
+
+                    <div class="card analytics-number">
+
+                        <span class="muted">
+                            Commands used
+                        </span>
+
+                        <strong>
+                            12,842
+                        </strong>
+
+                        <span class="trend">
+                            ↑ 14.2%
+                        </span>
+
+                    </div>
+
+
+                    <div class="card analytics-number">
+
+                        <span class="muted">
+                            Messages
+                        </span>
+
+                        <strong>
+                            84.6k
+                        </strong>
+
+                        <span class="trend">
+                            ↑ 6.8%
+                        </span>
+
+                    </div>
+
+
+                    <div class="card analytics-number">
+
+                        <span class="muted">
+                            Moderation actions
+                        </span>
+
+                        <strong>
+                            1,284
+                        </strong>
+
+                        <span class="trend">
+                            ↓ 3.1%
+                        </span>
+
+                    </div>
+
+
+                    <div class="card chart-card">
+
+                        <div class="card-title">
+
+                            <div>
+                                <h2>Member growth</h2>
+
+                                <span class="muted">
+                                    Last 30 days
+                                </span>
+                            </div>
+
+                            <strong>
+                                +382
+                            </strong>
+
+                        </div>
+
+                        <div class="chart">
+
+                            <div class="chart-line">
+
+                                <span style="height:35%"></span>
+                                <span style="height:43%"></span>
+                                <span style="height:40%"></span>
+                                <span style="height:48%"></span>
+                                <span style="height:52%"></span>
+                                <span style="height:49%"></span>
+                                <span style="height:61%"></span>
+                                <span style="height:58%"></span>
+                                <span style="height:66%"></span>
+                                <span style="height:70%"></span>
+                                <span style="height:74%"></span>
+                                <span style="height:82%"></span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="chart-labels">
+                            <span>Sep 1</span>
+                            <span>Sep 15</span>
+                            <span>Sep 28</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="card popular-card">
+
+                        <div class="card-title">
+
+                            <h2>
+                                Popular commands
+                            </h2>
+
+                            <span class="muted">
+                                30 days
+                            </span>
+
+                        </div>
+
+
+                        <div class="ranking-row">
+
+                            <span>01</span>
+                            <strong>/music</strong>
+
+                            <div class="ranking-bar">
+                                <i style="width:88%"></i>
+                            </div>
+
+                            <b>4.2k</b>
+
+                        </div>
+
+
+                        <div class="ranking-row">
+
+                            <span>02</span>
+                            <strong>/poll</strong>
+
+                            <div class="ranking-bar">
+                                <i style="width:64%"></i>
+                            </div>
+
+                            <b>2.8k</b>
+
+                        </div>
+
+
+                        <div class="ranking-row">
+
+                            <span>03</span>
+                            <strong>/help</strong>
+
+                            <div class="ranking-bar">
+                                <i style="width:48%"></i>
+                            </div>
+
+                            <b>1.9k</b>
+
+                        </div>
+
+
+                        <div class="ranking-row">
+
+                            <span>04</span>
+                            <strong>/stats</strong>
+
+                            <div class="ranking-bar">
+                                <i style="width:35%"></i>
+                            </div>
+
+                            <b>1.1k</b>
+
+                        </div>
+
+
+                        <div class="ranking-row">
+
+                            <span>05</span>
+                            <strong>/ticket</strong>
+
+                            <div class="ranking-bar">
+                                <i style="width:26%"></i>
+                            </div>
+
+                            <b>782</b>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card system-card">
+
+                        <div class="card-title">
+
+                            <h2>
+                                System health
+                            </h2>
+
+                            <span class="trend">
+                                Operational
+                            </span>
+
+                        </div>
+
+
+                        <div class="health-row">
+                            <span>Bot uptime</span>
+                            <strong>99.98%</strong>
+                        </div>
+
+                        <div class="health-row">
+                            <span>Average latency</span>
+                            <strong>43ms</strong>
+                        </div>
+
+                        <div class="health-row">
+                            <span>API response</span>
+                            <strong>118ms</strong>
+                        </div>
+
+                        <div class="health-row">
+                            <span>Commands success</span>
+                            <strong>99.6%</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <div class="footer-note">
+                Helix dashboard · responsive by design
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- ================= MOBILE NAV ================= -->
+
+    <nav class="mobile-nav">
+
+        <button
+            class="mobile-nav-item active"
+            data-page="home">
+
+            <span>⌂</span>
+            <small>Home</small>
+
+        </button>
+
+        <button
+            class="mobile-nav-item"
+            data-page="commands">
+
+            <span>⌘</span>
+            <small>Commands</small>
+
+        </button>
+
+        <button
+            class="mobile-nav-item"
+            data-page="automation">
+
+            <span>✦</span>
+            <small>Auto</small>
+
+        </button>
+
+        <button
+            class="mobile-nav-item"
+            data-page="stats">
+
+            <span>◌</span>
+            <small>Stats</small>
+
+        </button>
+
+    </nav>
+
+
+    <!-- ================= THEME MENU ================= -->
+
+    <div class="theme-menu" id="themeMenu">
+
+        <h3>
+            Choose a theme
+        </h3>
+
+        <div class="theme-hint">
+            Your choice is saved on this device.
+        </div>
+
+        <div
+            class="theme-options"
+            id="themeOptions">
+        </div>
+
+    </div>
+
+
+    <!-- ================= TOAST ================= -->
+
+    <div class="toast" id="toast"></div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   PAGE NAVIGATION
+   ===================================================== */
+
+const pages = [
+    "home",
+    "commands",
+    "automation",
+    "stats"
+];
+
+
+function showPage(page) {
+
+    if (!pages.includes(page)) {
+        page = "home";
+    }
+
+    document
+        .querySelectorAll(".page")
+        .forEach(section => {
+
+            section.classList.remove(
+                "active-page"
+            );
+
+        });
+
+
+    const target =
+        document.getElementById(
+            "page-" + page
+        );
+
+
+    if (target) {
+        target.classList.add(
+            "active-page"
+        );
+    }
+
+
+    document
+        .querySelectorAll(".nav-item")
+        .forEach(button => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.page === page
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(".mobile-nav-item")
+        .forEach(button => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.page === page
+            );
+
+        });
+
+
+    history.replaceState(
+        null,
+        "",
+        "#" + page
+    );
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+document
+    .querySelectorAll("[data-page]")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                showPage(
+                    button.dataset.page
+                );
+
+                closeMenus();
+
+            }
+        );
+
+    });
+
+
+window.addEventListener(
+    "load",
+    () => {
+
+        const requestedPage =
+            location.hash.replace("#", "");
+
+        showPage(
+            pages.includes(requestedPage)
+                ? requestedPage
+                : "home"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   TOAST
+   ===================================================== */
+
+function toast(message) {
+
+    const element =
+        document.getElementById("toast");
+
+
+    element.textContent =
+        message;
+
+
+    element.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+
+    window.toastTimer =
+        setTimeout(
+            () => {
+
+                element.classList.remove(
+                    "show"
+                );
+
+            },
+            1800
+        );
+
+}
+
+
+/* =====================================================
+   SERVER
+   ===================================================== */
+
+function selectServer(name) {
+
+    document.getElementById(
+        "heroServer"
+    ).textContent = name;
+
+
+    document
+        .querySelectorAll(".server")
+        .forEach(server => {
+
+            server.classList.toggle(
+                "active",
+                server.innerText.includes(name)
+            );
+
+        });
+
+
+    toast(
+        name + " selected"
+    );
+
+}
+
+
+/* =====================================================
+   COMMAND TOGGLE
+   ===================================================== */
+
+function toggleCommand(element) {
+
+    element.classList.toggle(
+        "on"
+    );
+
+
+    const parent =
+        element.closest(
+            ".command-card, .command"
+        );
+
+
+    if (parent) {
+
+        const label =
+            parent.querySelector(
+                ".status-label"
+            );
+
+
+        if (label) {
+
+            label.textContent =
+                element.classList.contains("on")
+                    ? "Enabled"
+                    : "Disabled";
+
+        }
+
+    }
+
+
+    const commandElement =
+        parent?.querySelector(
+            "code, h3"
+        );
+
+
+    const command =
+        commandElement
+            ? commandElement.textContent.trim()
+            : "Command";
+
+
+    const enabled =
+        element.classList.contains(
+            "on"
+        );
+
+
+    toast(
+        command +
+        (enabled
+            ? " enabled"
+            : " disabled")
+    );
+
+}
+
+
+/* =====================================================
+   COMMAND SEARCH
+   ===================================================== */
+
+function filterCommands() {
+
+    const search =
+        document
+            .getElementById("commandSearch")
+            .value
+            .toLowerCase();
+
+
+    const category =
+        document
+            .getElementById("commandCategory")
+            .value;
+
+
+    document
+        .querySelectorAll(".command-card")
+        .forEach(card => {
+
+            const name =
+                card.dataset.name.toLowerCase();
+
+            const cardCategory =
+                card.dataset.category;
+
+
+            const matchesSearch =
+                name.includes(search);
+
+            const matchesCategory =
+                category === "all" ||
+                cardCategory === category;
+
+
+            card.style.display =
+                matchesSearch &&
+                matchesCategory
+                    ? "flex"
+                    : "none";
+
+        });
+
+}
+
+
+/* =====================================================
+   AUTOMATION
+   ===================================================== */
+
+function toggleAutomation(element) {
+
+    element.classList.toggle(
+        "on"
+    );
+
+
+    const card =
+        element.closest(
+            ".automation-card"
+        );
+
+
+    const status =
+        card.querySelector(
+            ".automation-status"
+        );
+
+
+    const enabled =
+        element.classList.contains(
+            "on"
+        );
+
+
+    status.textContent =
+        enabled
+            ? "Active"
+            : "Disabled";
+
+
+    toast(
+        enabled
+            ? "Automation enabled"
+            : "Automation disabled"
+    );
+
+}
+
+
+/* =====================================================
+   PROFILE MENU
+   ===================================================== */
+
+const profileBtn =
+    document.getElementById(
+        "profileBtn"
+    );
+
+const profileMenu =
+    document.getElementById(
+        "profileMenu"
+    );
+
+
+profileBtn.addEventListener(
+    "click",
+    event => {
+
+        event.stopPropagation();
+
+        const open =
+            profileMenu.classList.toggle(
+                "open"
+            );
+
+
+        profileBtn.setAttribute(
+            "aria-expanded",
+            open
+        );
+
+
+        if (open) {
+
+            notificationMenu.classList.remove(
+                "open"
+            );
+
+            notificationBtn.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   NOTIFICATIONS
+   ===================================================== */
+
+const notificationBtn =
+    document.getElementById(
+        "notificationBtn"
+    );
+
+const notificationMenu =
+    document.getElementById(
+        "notificationsMenu"
+    );
+
+const notificationDot =
+    document.getElementById(
+        "notificationDot"
+    );
+
+const notificationCount =
+    document.getElementById(
+        "notificationCount"
+    );
+
+
+notificationBtn.addEventListener(
+    "click",
+    event => {
+
+        event.stopPropagation();
+
+
+        const open =
+            notificationMenu.classList.toggle(
+                "open"
+            );
+
+
+        notificationBtn.setAttribute(
+            "aria-expanded",
+            open
+        );
+
+
+        if (open) {
+
+            profileMenu.classList.remove(
+                "open"
+            );
+
+            profileBtn.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+    }
+);
+
+
+/* Mark all notifications as read */
+
+document
+    .getElementById("markReadBtn")
+    .addEventListener(
+        "click",
+        event => {
+
+            event.stopPropagation();
+
+
+            document
+                .querySelectorAll(
+                    "[data-notification]"
+                )
+                .forEach(notification => {
+
+                    notification.classList.remove(
+                        "unread"
+                    );
+
+                });
+
+
+            notificationDot.classList.remove(
+                "show"
+            );
+
+
+            notificationCount.textContent =
+                "All caught up";
+
+
+            toast(
+                "Notifications marked as read"
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   CLOSE MENUS
+   ===================================================== */
+
+function closeMenus() {
+
+    profileMenu.classList.remove(
+        "open"
+    );
+
+    notificationMenu.classList.remove(
+        "open"
+    );
+
+    themeMenu.classList.remove(
+        "open"
+    );
+
+
+    profileBtn.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+
+    notificationBtn.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+}
+
+
+document.addEventListener(
+    "click",
+    event => {
+
+        if (
+            !event.target.closest(
+                ".menu-wrapper"
+            ) &&
+            !event.target.closest(
+                "#themeMenu"
+            ) &&
+            event.target.id !== "themeBtn"
+        ) {
+
+            closeMenus();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key === "Escape") {
+            closeMenus();
+        }
+
+    }
+);
+
+
+/* =====================================================
+   LOGOUT
+   ===================================================== */
+
+function logout() {
+
+    closeMenus();
+
+    toast(
+        "Logout would be handled by your Python backend"
+    );
+
+}
+
+
+/* =====================================================
+   THEMES
+   ===================================================== */
+
+const themes = [
+
+    ["default", "Paper + Orange", "#ff5b22"],
+    ["midnight", "Midnight", "#8b7cff"],
+    ["ocean", "Ocean", "#087f91"],
+    ["lavender", "Lavender", "#8254d6"],
+    ["sunset", "Sunset", "#e64c35"],
+    ["graphite", "Graphite", "#e9eaec"],
+    ["forest", "Forest Night", "#64d58d"],
+    ["amoled", "AMOLED", "#ffffff"],
+    ["rose", "Rose", "#e85d8b"],
+    ["cyber", "Cyber", "#35e6ff"],
+    ["cherry", "Cherry", "#ff5470"],
+    ["sapphire", "Sapphire", "#4d9cff"],
+    ["matcha", "Matcha", "#6c9d45"],
+    ["mono", "Mono", "#111111"]
+
+];
+
+
+const root =
+    document.documentElement;
+
+const themeMenu =
+    document.getElementById(
+        "themeMenu"
+    );
+
+const themeOptions =
+    document.getElementById(
+        "themeOptions"
+    );
+
+
+themes.forEach(
+    ([id, name, color]) => {
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.className =
+            "theme-option";
+
+
+        button.dataset.theme =
+            id;
+
+
+        button.innerHTML = `
+            <span
+                class="swatch"
+                style="--swatch:${color}">
+            </span>
+
+            <span>${name}</span>
+        `;
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                applyTheme(id);
+
+                themeMenu.classList.remove(
+                    "open"
+                );
+
+                toast(
+                    name +
+                    " theme applied"
+                );
+
+            }
+        );
+
+
+        themeOptions.appendChild(
+            button
+        );
+
+    }
+);
+
+
+function applyTheme(theme) {
+
+    if (
+        !theme ||
+        theme === "default"
+    ) {
+
+        root.removeAttribute(
+            "data-theme"
+        );
+
+    } else {
+
+        root.dataset.theme =
+            theme;
+
+    }
+
+
+    localStorage.setItem(
+        "helix-theme",
+        theme || "default"
+    );
+
+
+    document
+        .querySelectorAll(".theme-option")
+        .forEach(option => {
+
+            option.classList.toggle(
+                "active",
+                option.dataset.theme ===
+                (theme || "default")
+            );
+
+        });
+
+}
+
+
+applyTheme(
+    localStorage.getItem(
+        "helix-theme"
+    ) || "default"
+);
+
+
+document
+    .getElementById("themeBtn")
+    .addEventListener(
+        "click",
+        event => {
+
+            event.stopPropagation();
+
+
+            themeMenu.classList.toggle(
+                "open"
+            );
+
+
+            profileMenu.classList.remove(
+                "open"
+            );
+
+            notificationMenu.classList.remove(
+                "open"
+            );
+
+        }
+    );
+
+
+</script>
+
+</body>
+</html>
